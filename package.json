@@ -1,0 +1,16 @@
+{
+  "name": "neural-network-learning-lab",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -n web,api -c cyan,magenta \"npm:dev:web\" \"npm:dev:api\"",
+    "dev:web": "npm --prefix apps/web run dev",
+    "dev:api": "./.venv/bin/uvicorn app.main:app --reload --app-dir apps/api --port 8000",
+    "test": "npm run test:web && npm run test:api",
+    "test:web": "npm --prefix apps/web test",
+    "test:api": "./.venv/bin/pytest",
+    "lint": "npm --prefix apps/web run lint && ./.venv/bin/ruff check apps/api",
+    "typecheck": "npm --prefix apps/web run typecheck && ./.venv/bin/mypy apps/api/app"
+  },
+  "devDependencies": {"concurrently": "9.1.2"}
+}
+
